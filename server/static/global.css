@@ -1,0 +1,63 @@
+/* 
+Copyright 2020 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+body {margin:0; font-size: 1.2em; background: #fff; min-width:480px;min-height:560px;}
+#page {position: absolute; top:0; left: 0; width:100%}
+#top-nav {position: absolute;background-color: #262d33;}
+#behind-top-nav {position: relative;}
+#top-nav,#behind-top-nav{height:3em; width:100%; margin:0; top:0; left:0}
+#top-nav>* {width:25%;min-width:120px}
+#top-nav a {text-decoration:none; color:white;}
+#top-nav>#nav-user {text-align: right;}
+#msg-icon{width:2em}
+#msg-text{width:85%;min-width:360px;text-align: center; white-space: pre-line;}
+#msg-close{width:2em;text-align: right;}
+#msg-bar {background-color: #ddd;}
+#msg-bar.info	{background-color: #ccf; color: #228; }
+#msg-bar.ok		{background-color: #cdc; color: #262; }
+#msg-bar.warn 	{background-color: #ddb; color: #662; }
+#msg-bar.err 	{background-color: #fcc; color: #622; }
+#main{margin-top:4em;}
+#main>* {margin-bottom: 0.75em}
+.col{display: flex; flex-direction: column; align-items: center; width:100%}
+.row{display: flex; flex-direction: row; align-items: center; justify-content: space-around; width:100%}
+.title-bar{border-bottom: solid 1px #DDD;color:#333;}
+h1 {font-family:"Palatino, Serif";text-align: center;}
+input.focus{font-size:1.4em; height:2em; width:12em; border:1px solid #339;border-radius: 0.25em;margin:1em 0}
+.button {
+	cursor:pointer;
+	border:1px solid #339; background-color: #eef; color:#339;
+	min-height:2.5em; border-radius: 0.5em; width:12em;
+	display:flex; flex-direction: row; align-items: center;justify-content: center}
+.button.hi {background-color: #55f; color:#fff;}
+.button img {max-height:1.5em;max-width:1.5em;margin:0.5em;}
+.ws-pl {white-space: pre-line;}
+.d-n {display:none}
+.subtle {font-size: 0.8em; color:#666}
+a.card-link{text-decoration: none;color:#333;}
+.list .card {
+	width:480px;
+	margin:10px 25px;
+	padding: 0.5em 2em;
+}
+.card{box-shadow: 3px 3px 5px rgba(0,0,0,0.2);}
+.card-label {font-weight: bold;}
+.card-descr {
+	display: block;
+	height: 5em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

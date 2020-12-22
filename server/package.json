@@ -1,0 +1,20 @@
+{
+  "name": "micro-admin-for-looker",
+  "version": "0.1.0",
+  "display_name": "μAdmin for Looker",
+  "description": "μAdmin for Looker allows the owner of a Looker instance to easily define administrative flows and selectively expose them to end users",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "Looker"
+  ],
+  "author": "Fabio Beltramini",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  }
+}
