@@ -47,13 +47,13 @@ module.exports = async function setupHost(config, host){
 	const oauthClients = await api(`GET oauth_client_apps.client_guid,redirect_uri,enabled`)
 	const myOauthClient = oauthClients.find(c=>c.client_guid === oauthClientAppGuid)
 	if(!myOauthClient){
-		await api(`POST oauth_client_apps/${oauthClientAppGuid}`,{
+		const resp = await api(`POST oauth_client_apps/${oauthClientAppGuid}`,{body:{
 			client_guid: oauthClientAppGuid,
 			redirect_uri,
 			display_name: package.display_name,
 			description: package.description,
 			enabled: true,
-			})
+			}})
 		return
 		}
 
@@ -75,13 +75,13 @@ module.exports = async function setupHost(config, host){
 		}
 	if(issues.length && host.forceOauthClientConfig){
 		console.warn(`[Overriding Issues]\n${issues.join('\n')}`)
-		await api(`PATCH oauth_client_apps/${oauthClientAppGuid}`,{
+		await api(`PATCH oauth_client_apps/${oauthClientAppGuid}`,{body:{
 			client_guid: oauthClientAppGuid,
 			redirect_uri,
 			display_name: package.display_name,
 			description: package.description,
 			enabled: true,
-			})
+			}})
 		return
 		}
 	}

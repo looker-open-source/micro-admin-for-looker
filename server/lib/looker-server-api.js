@@ -93,6 +93,7 @@ function LookerServerApi({
 		//const callId = Math.random().toString(16).slice(2,6)
 		//log({t: "API Call Req",call: callId,endpoint: `${method} ${endpoint}`})
 		const start= Date.now()
+		let elapsed
 		while(true){
 			const authHeader = {
 					...(isAuthValid(auth)?{'Authorization': 'token '+ (token||auth.accessToken)}:{}),	
@@ -104,7 +105,7 @@ function LookerServerApi({
 				authStep = "skip" //Don't retry more than once
 				continue
 				}
-			const elapsed = Date.now()-start
+			elapsed = Date.now()-start
 			const body = response && response.body || {}
 			// Not doing separate logging for request and response anymore
 			// log({t:"API Call Res", call: callId, msec: elapsed, code: response.statusCode,resLen: body.length,resId: body.id})
@@ -182,7 +183,7 @@ function LookerServerApi({
 					.join("&")
 			: body
 			)
-			
+
 		return await new Promise((res,rej)=>{
 			let requestConfig = {
 				method,
