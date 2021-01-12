@@ -11,6 +11,6 @@ RUN npm install
 COPY . .
 
 #Run
-EXPOSE 3000
+EXPOSE 8080
 WORKDIR ./server
 CMD ["node", "index.js"]
