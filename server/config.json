@@ -1,0 +1,25 @@
+{
+	"port":8080,
+	"oauthClientAppGuid":"micro-admin-for-looker",
+	"callbackUrlPrefix":"http://localhost:8080",
+	"primaryHostId":"your.dev.looker.com",
+	"hosts":{
+		"your.dev.looker.com":{
+			"apiHost":"your.dev.looker.com:19999",
+			"uiHost":"your.dev.looker.com",
+			"admin_credentials":{
+				"client_id":"clientid",
+				"client_secret":"clientsecret"
+			},
+			"forceOauthClientConfig":false
+		}
+	},
+	"flows":{
+		"hello-world":{
+			"label":"My First Flow",
+			"description":"A demo flow that doesn't edit any data. Try me!",
+			"requiredGroups":[],
+			"disabled":false
+		}
+	}
+}
