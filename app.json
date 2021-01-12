@@ -1,0 +1,29 @@
+{
+    "name": "foo-app",
+    "env": {
+        "PRIMARYHOSTID": {
+            "description": "specify a primary host ID",
+            "value": "your.looker.com",
+            "required": true
+        },
+        "APIHOST": {
+            "description": "API URL for your looker. Leave blank if :19999",
+            "required": false
+        },
+        "CLIENT_ID": {
+            "description": "Looker API Client ID",
+            "required": true
+        },
+        "CLIENT_SECRET": {
+            "description": "Looker API CLient Secret",
+            "required": true
+        }
+    },
+    "options": {
+        "allow-unauthenticated": true,
+        "memory": "512Mi",
+        "cpu": "1",
+        "port": "80",
+        "http2": false
+    }
+}

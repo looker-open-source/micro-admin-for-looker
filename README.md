@@ -14,6 +14,9 @@ Some key features include:
 
 ## Deployment
 
+### Deploy with Cloud Run
+[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
+
 - Clone the repo
 - In the `server` directory:
   - Configure `config.json` (see example in `config.example.json`)

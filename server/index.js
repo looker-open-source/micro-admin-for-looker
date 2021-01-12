@@ -1,4 +1,4 @@
-/* 
+/*
 Copyright 2020 Google LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,8 +26,35 @@ const configLoader = require(`./lib/config-loader.js`)
 const setupHost = require('./lib/setup-host.js')
 
 const config = configLoader(require('./config.json'))
-const hosts = config.hosts
+// const hosts = config.hosts
 const primaryHostId = config.primaryHostId
+
+//Check for Env variables if being deployed via cloud run
+if(process.env.PORT) {
+    config.port = process.env.PORT
+}
+if(process.env.PRIMARYHOSTID) {
+	config.primaryHostId = process.env.PRIMARYHOSTID
+}
+const apiHost = config.primaryHostId + ':19999'
+if(process.env.APIHOST) {
+	const apiHost = process.env.apiHost
+}
+
+
+const hosts = {
+	[config.primaryHostId]: {
+	  "apiHost": apiHost,
+	  "id": 1,
+	  "uiHost": primaryHostId,
+	  "admin_credentials": {
+		  "client_id": process.env.CLIENT_ID,
+		  "client_secret": process.env.CLIENT_SECRET
+	  },
+	  "forceOauthClientConfig": false
+	}
+}
+
 
 main().catch(console.error)
 
@@ -61,7 +88,7 @@ async function initServer(){
 			})
 		.filter(Boolean)
 		)
-	
+
 	const app = express()
 
 	app.use(express.static('static',{index:"index.xhtml",maxAge:15000}))
@@ -70,7 +97,7 @@ async function initServer(){
 	app.get ('/api/hosts',routeHandlers.hosts({hosts,primaryHostId}))
 	app.get ('/api/flows',routeHandlers.flows({flows}))
 	app.post('/api/flow/:flow/execute', routeHandlers.flowExecute({hosts,flows,primaryHostId}))
-	
+
 	app.use(function (err, req, res, next) {
 		res.status(err.status||500).json(err.message||err)
 		})
