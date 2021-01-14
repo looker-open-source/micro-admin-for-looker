@@ -33,16 +33,13 @@ main().catch(console.error)
 
 async function main(){
 
-	console.log(`Checking Looker hosts...`)
 	const asyncAllSetupHosts = Object.values(hosts).map(async host=>{
 		await setupHost(config,host)
-		console.log(`> Looker host ${host.id} ok`)
 		})
 	await Promise.all(asyncAllSetupHosts)
 
-	console.log("Starting http server...")
 	await initServer()
-	console.log(`> http://localhost:${config.port}/`)
+	console.log(`\nhttp://localhost:${config.port}/`)
 	}
 
 async function initServer(){

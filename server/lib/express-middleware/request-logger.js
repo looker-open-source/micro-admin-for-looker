@@ -33,7 +33,7 @@ module.exports = function({
 
 		innerJson = res.json
 		res.json = function wrapJson(...args){
-			if(typeof args[0] === "object"){
+			if(typeof args[0] === "object" && !Array.isArray(args[0])){
 				res.jsonProps = Object.keys(args[0])
 				}
 			return innerJson.apply(res,args)
@@ -51,6 +51,8 @@ function responseLogger(){
 		t:"Request End",
 		code: this.statusCode,
 		msec: elapsed,
-		resProps: (this.jsonProps||[]).join(',') || undefined
+		resProps: this.jsonProps 
+			? (this.jsonProps.slice(0,50).join(',') + (this.jsonProps.length>50?'...':''))
+			: undefined
 		}))
 	}

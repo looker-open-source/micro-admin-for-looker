@@ -59,6 +59,8 @@ function LookerServerApi({
 			authStep = defaultAuthStep, // force | skip | undefined 
 			contentType = "application/json",
 			stage = false,
+			fullResponse = false,
+			headers,
 			console = defaultConsole
 		}={}){
 		const log = typeof console == "function" ? console : console.log.bind(console)
@@ -69,8 +71,9 @@ function LookerServerApi({
 			.replace(/\.[^?#]+/, str=>{fields=str.slice(1); return ""}) //Extract & trim fields spec
 			.replace(/^\//,'') //Trim leading slash
 		query = {fields,...query}
-		const headers = {
-			...(appId?{'x-looker-appid': appId}:{})
+		headers = {
+			...(appId?{'x-looker-appid': appId}:{}),
+			...headers
 			}
 		const stagedRequest = {
             method,
@@ -122,7 +125,7 @@ function LookerServerApi({
 					message:`${method} ${host}/${endpoint} API returned a ${response.statusCode} status code`
 					}
 				}
-			return body
+			return fullResponse ? response : body
 			}
 			function requestError(e){
 				const defaultMessage = "Unknown error with upstream HTTPS request"
@@ -183,7 +186,7 @@ function LookerServerApi({
 					.join("&")
 			: body
 			)
-
+			
 		return await new Promise((res,rej)=>{
 			let requestConfig = {
 				method,
