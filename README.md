@@ -20,10 +20,10 @@ Some key features include:
   - Run `npm install`
   - Run `node index.js` (or your prefered approach to starting node)
 - Configure Looker
-  - At /admin/embed , add the origin/domain of your server into the allowlist
+  - At /admin/embed , add the origin/domain of your server into the [embed allowlist](https://docs.looker.com/admin-options/platform/embed)
 - Misc.
   - If your Looker instance uses a self-signed certificate or private CA, you will need to run Node with [extra certificates](https://nodejs.org/api/cli.html#cli_node_extra_ca_certs_file)
-  
+
 ## About
 
 ### License
