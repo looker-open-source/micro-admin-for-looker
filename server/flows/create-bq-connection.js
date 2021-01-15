@@ -43,10 +43,10 @@ module.exports = {
 		//if(!state.host){ok=false}
 		if(!state.database){ok=false}
 		//if(!state.username){ok=false}
-		if(!state.certificate){ok=false}
+		if(!state.certificateUpload){ok=false}
 		if(!ok){
 			return {
-				message:"this param is missing...",
+				//message:"this param is missing...",
 				prompt: {
 					connectionName: {
 						type: "string",
@@ -68,22 +68,32 @@ module.exports = {
 					// 	type: "string",
 					// 	required: true
 					// 	},
-					certificate:{
+					certificateUpload:{
 						type: "string",
-						required: true
+						title: "Certificate",
+						required: true,
+						media: {
+							type:"application/json",
+							binaryEncoding: "base64"
+							}
 						}
 					}
 				}
 			}
-		// TODO fetch existing connections and check for conflicts?
-		const certificate = JSON.parse(state.certificate)
-		const base64EncodedCertificate = Buffer.from(state.certificate).toString('base64')
+
+		const base64EncodedCertificate = state.certificateUpload.replace(/^data:.*?base64,/,'')
+		const certificateJson = Buffer.from(base64EncodedCertificate,'base64').toString('utf8')
+		const certificate = JSON.parse(certificateJson)
+
 		const username = certificate.client_email
 		const dbHost = certificate.project_id
 
-		await
-		//console.log(
-		 adminApi("POST connections",{body:{
+		if(!username){return {message:"Invalid certificate: Missing client_email"}}
+		if(!dbHost){return {message:"Invalid certificate: Missing project_id"}}
+
+		// TODO fetch existing connections and check for conflicts?
+
+		await adminApi("POST connections",{body:{
 			name:state.connectionName,
 			host:dbHost,
 			database:state.database,
@@ -97,7 +107,6 @@ module.exports = {
 			"certificate":base64EncodedCertificate,
 			"file_type":".json" 
 			}})
-		//)
 
 		}
 	}
