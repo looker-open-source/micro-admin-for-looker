@@ -14,15 +14,37 @@ Some key features include:
 
 ## Deployment
 
+### Looker Configuration
+
+- At /admin/embed , add the origin/domain of your server into the [embed allowlist](https://docs.looker.com/admin-options/platform/embed)
+- Create an administrative "service account" user, with API Credentials
+
+### Basic Deployment
+
 - Clone the repo
-- In the `server` directory:
-  - Configure `config.json` (see example in `config.example.json`)
+- From the `server` directory:
+  - Configure `config.json`
+    - See example in `config.example.json`
+    - For the basic deployment, set `serveUi:true`, to serve both the API and UI from the same server
   - Run `npm install`
   - Run `node index.js` (or your prefered approach to starting node)
-- Configure Looker
-  - At /admin/embed , add the origin/domain of your server into the [embed allowlist](https://docs.looker.com/admin-options/platform/embed)
-- Misc.
-  - If your Looker instance uses a self-signed certificate or private CA, you will need to run Node with [extra certificates](https://nodejs.org/api/cli.html#cli_node_extra_ca_certs_file)
+
+### Separate API Server
+
+- From the `server` directory:
+  - Configure `config.json`
+    - See example in `config.example.json`
+    - Set `serveUi:false`
+    - Set `corsOrigin`
+  - Run `npm install`
+  - Run `node index.js` (or your prefered approach to starting node)
+- From the `ui/static` directory
+  - Configure `config.json`
+    - Set `apiPrefix`
+  - Deploy the directory statically with the HTTP server of your choice
+
+### Miscellaneous
+μAdmin makes back-end API calls to Looker over HTTPS. Firewalls should be configured accordingly. If your Looker instance uses a self-signed certificate or private CA, you will need to run Node with [extra certificates](https://nodejs.org/api/cli.html#cli_node_extra_ca_certs_file)
 
 ## About
 

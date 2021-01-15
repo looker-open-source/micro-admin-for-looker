@@ -18,7 +18,7 @@ const fs = require('fs')
 const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
-
+const cors = require('cors')
 
 const expressRequestLogger = require('./lib/express-middleware/request-logger.js')
 const routeHandlers = require('./route-handlers')
@@ -60,14 +60,20 @@ async function initServer(){
 		)
 	
 	const app = express()
-
-	app.use(express.static('static',{index:"index.xhtml",maxAge:15000}))
+	
 	app.use('/api',expressRequestLogger({console}))
+	if(config.corsOrigin){
+		app.use('/api',cors({origin:config.corsOrigin,maxAge:7200}))
+		}
 	app.use('/api',bodyParser.json())
 	app.get ('/api/hosts',routeHandlers.hosts({hosts,primaryHostId}))
 	app.get ('/api/flows',routeHandlers.flows({flows}))
 	app.post('/api/flow/:flow/execute', routeHandlers.flowExecute({hosts,flows,primaryHostId}))
 	
+	if(config.serveUi){
+		app.use(express.static('../ui/static',{index:"index.xhtml",maxAge:15000}))
+		}
+
 	app.use(function (err, req, res, next) {
 		res.status(err.status||500).json(err.message||err)
 		})

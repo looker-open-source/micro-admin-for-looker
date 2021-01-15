@@ -16,6 +16,7 @@ limitations under the License.
 
 import lookerAuth from '../lib/looker-auth.mjs'
 import {offon,$,$$,message} from '../lib/utils.mjs'
+import config from '../config.js'
 
 	
 main().catch(e=>message(e.message||e))
@@ -39,7 +40,7 @@ async function main(retry=true){
 			}
 		}
 	
-	const response = await fetch("/api/flows",{
+	const response = await fetch(`${config.apiPrefix}/api/flows`,{
 		headers:{authorization:`token ${host.access_token}`}
 		})
 	if(!response.ok){

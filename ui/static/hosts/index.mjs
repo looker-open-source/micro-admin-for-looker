@@ -16,6 +16,7 @@ limitations under the License.
 
 import lookerAuth from '../lib/looker-auth.mjs'
 import {$,message} from '../lib/utils.mjs'
+import config from '../config.js'
 
 let cache = {}
 
@@ -51,7 +52,7 @@ async function main(){
 
 async function fetchHostsAndPrimaryHostId(){
 	$("#hosts").textContent = "Loading..."
-	const response = await fetch("/api/hosts")
+	const response = await fetch(`${config.apiPrefix}/api/hosts`)
 	if(!response.ok){
 		throw "Host listing response error"
 		}

@@ -16,6 +16,7 @@ limitations under the License.
 
 import lookerAuth from '../lib/looker-auth.mjs'
 import {$,offon,urlDecodeObj,message} from '../lib/utils.mjs'
+import config from '../config.js'
 
 const urlParams = {
 	...urlDecodeObj(document.location.search,"?"),
@@ -34,7 +35,7 @@ async function main(){
 	const stateErrs = jsonEditor ? jsonEditor.validate() : []
 	const state = jsonEditor && !stateErrs.length && jsonEditor.getValue() || {}
 	offon("#main>*","#throbber")
-	const fetchResponse = await fetch(`/api/flow/${urlParams.id}/execute`,{
+	const fetchResponse = await fetch(`${config.apiPrefix}/api/flow/${urlParams.id}/execute`,{
 		method: 'POST',
 		headers: {
 		'Content-Type': 'application/json'
