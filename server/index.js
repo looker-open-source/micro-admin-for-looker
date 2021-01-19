@@ -70,7 +70,7 @@ async function initServer(){
 	app.get ('/api/flows',routeHandlers.flows({flows}))
 	app.post('/api/flow/:flow/execute', routeHandlers.flowExecute({hosts,flows,primaryHostId}))
 	
-	if(config.serveUi){
+	if(config.serveUi!==false){ //Default to true if undefined for config backwards compatibility
 		app.use(express.static('../ui/static',{index:"index.xhtml",maxAge:15000}))
 		}
 
