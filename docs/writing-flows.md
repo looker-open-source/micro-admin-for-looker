@@ -1,3 +1,4 @@
+[Docs](index.md) >
 
 # Writing Flows
 
@@ -40,7 +41,7 @@ In general, the function:
 
 - Is bound to a specific user (via API credential or access token)
 - Will transparently renew expired access tokens by default (for credential-based/admin users)
-- Is bound to logger that automatically logs the API request, including [metadata](#api-logger-metadata)
+- Is bound to a logger that automatically logs the API request, including [metadata](logging.md)
 
 The function requires an "endpoint spec" argument, and accepts an optional "options" object argument
 
@@ -55,17 +56,3 @@ The function requires an "endpoint spec" argument, and accepts an optional "opti
 	- `stage` - Set to true to return a representation of the HTTP request instead of making the HTTP call
 	- `fullResponse` - Set to true to return the raw HTTP response
 
-### API Logging Metadata
-
-Calls to an API function will log the following metadata for auditability:
-
-- `r` - An identifier for the current webserver request
-- `f` - The flow ID for the current flow
-- `h` - The host ID or nickname for the target Looker instance/host
-- `u` - The user ID of the invoking user in that Looker instance
-- `a` - Whether the API call was executed via the admin API client rather than the user's own API client
-- `call` - The endpoint (verb + path) called
-- `code` - The HTTP response code
-- `msec` - Elapsed time in milliseconds, including the transparent token refresh call, if any
-- `resId` - If the response was an object with an `id`, the id
-- `resLen` - If the response was an array, its length
