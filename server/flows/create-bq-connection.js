@@ -27,26 +27,12 @@ module.exports = {
 		const {user, adminApi} = host
 		
 		let ok = true
-		// if(!state.userId){
-		// 	log("User to disable not provided.")
-		// 	log("Retreiving user list for prompt")
-		// 	const allUsers = await adminApi(`users.id,display_name,email,avatar_url,is_disabled`)
-		// 	const disableCandidates = allUsers.filter(u =>
-		// 		! u.is_disabled // Hide already disabled users
-		// 		&& u.id !== user.id // Don't suggest our user to disable themselves, for safety
-		// 		)
-		// 		.sort((a,b)=>(a.display_name||'').localeCompare(b.display_name||''))
-		// 	log(`Returning list of ${disableCandidates.length} users for prompt`)
 
-		// 	}
 		if(!state.connectionName){ok=false}
-		//if(!state.host){ok=false}
 		if(!state.database){ok=false}
-		//if(!state.username){ok=false}
 		if(!state.certificateUpload){ok=false}
 		if(!ok){
 			return {
-				//message:"this param is missing...",
 				prompt: {
 					connectionName: {
 						type: "string",
@@ -64,10 +50,6 @@ module.exports = {
 					pdtsEnabled: {
 						type: "boolean"
 					},
-					// username:{
-					// 	type: "string",
-					// 	required: true
-					// 	},
 					certificateUpload:{
 						type: "string",
 						title: "Certificate",
@@ -91,7 +73,7 @@ module.exports = {
 		if(!username){return {message:"Invalid certificate: Missing client_email"}}
 		if(!dbHost){return {message:"Invalid certificate: Missing project_id"}}
 
-		// TODO fetch existing connections and check for conflicts?
+		// May want to fetch existing connections and check for conflicts/duplicates?
 
 		await adminApi("POST connections",{body:{
 			name:state.connectionName,
