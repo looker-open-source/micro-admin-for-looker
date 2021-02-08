@@ -2,6 +2,10 @@
 
 # Configuration
 
+## Configuration Example
+
+See [`server/config.example.json`](../server/config.example.json)
+
 ## Configuration Reference
 
 <ul>
@@ -31,6 +35,26 @@
 	Optional, default true. Whether the server should also serve the default static UI. You may want to use change flag when deploying static UI assets to a CDN instead.
 	</details>
 	</li>
+	<li><details><summary><code>flows</code></summary>
+	Required. An object, where each entry represents one flow. Each entry's key should match the filename of a file in the server/flows directory
+	</details>
+	</li>
+	<li><details><summary><code>flows.*.label</code></summary>
+	Optional. Overrides the label displayed to the user
+	</details>
+	</li>
+	<li><details><summary><code>flows.*.description</code></summary>
+	Optional. Overrides the description displayed to the user.
+	</details>
+	</li>
+	<li><details><summary><code>flows.*.disabled</code></summary>
+	Optional. Set to true to disable the flow while still keeping the entry in the config.
+	</details>
+	</li>
+	<li><details><summary><code>flows.*.requiredGroups</code></summary>
+	Required. An array containing zero or more Looker Group IDs that the user must belong to to invoke this flow.
+	</details>
+	</li>
 	<li><details><summary><code>hosts</code></summary>
 	Required. An object, where each entry represents one Looker instance and the key value becomes its ID. Often there will only be one entry.
 	</details>
@@ -48,7 +72,7 @@
 	</details>
 	</li>
 	<li><details><summary><code>hosts.*.oauthClientAppGuid</code></summary>
-	Optiona. A host-specific override for `oauthClientAppGuid`.
+	Optional. A host-specific override for `oauthClientAppGuid`.
 	</details>
 	</li>
 	</ul>
@@ -62,24 +86,3 @@
 	</ul>
 </li>
 </ul>
-
-
-	- `server/config.json`
-		- oauthClientAppGuid":"micro-admin-for-looker",i
-		- hosts
-		- hosts.*.apiHost
-		- hosts.*.uiHost
-		- hosts.*.adminCredentials
-		- flows
-		- flows.*.label
-		- flows.*.description
-		- flows.*.disabled
-		- flows.*.requiredGroups
-		- flows.*.hostId
-	- `ui/static/config.js`
-
-
-### corsOrigin
-
-Optional. A string containing an origin, or an array of strings containing origins, from which the server should accept CORS requests, if any. In the default configuration along with an undefined or true `serveUi` option, CORS is not needed since the UI is served from the same origin as the API server. For additional details about accepted arguments see [`cors` on NPM](https://www.npmjs.com/package/cors#configuration-options)
-
