@@ -15,6 +15,8 @@
 	- Run `npm install`
 	- Run `node index.js` (or your preferred approach to starting node)
 
+Note: As of Looker 22.16, OAuth clients cannot be set up without https. Please serve front-end assets with HTTPS to allow the redirect_uri to be accepted.
+
 ## Advanced or Production Deployment
 
 ### HTTPS
