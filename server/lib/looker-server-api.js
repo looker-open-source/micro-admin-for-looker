@@ -25,7 +25,7 @@ function tryJsonParse(str,dft){
 const noop = ()=>{}
 
 const globalDefaultConsole = o=>console.log(JSON.stringify(o))
-
+const debugConsole = console
 function LookerServerApi({
 		host,
 		clientId,
@@ -122,7 +122,8 @@ function LookerServerApi({
 			if(!response || !response.statusCode || response.statusCode>=400){
 				throw {
 					status: response.statusCode,
-					message:`${method} ${host}/${endpoint} API returned a ${response.statusCode} status code`
+					summary:`${method} ${host}/${endpoint} API returned a ${response.statusCode} status code`,
+					body: response.body
 					}
 				}
 			return fullResponse ? response : body
