@@ -216,10 +216,10 @@ function LookerServerApi({
 					resp.on("error", err => {rej(err)})
 					resp.on("abort", err => {rej(err)})
 					resp.on('end', () => {
-						try{res({
-							...resp,
-							...(data?{body: tryJsonParse(data,data)}:{})
-							})}
+						try{
+							resp.body = resp.body || tryJsonParse(data,data)
+							res(resp)
+							}
 						catch(e){rej(e)}
 						})
 					}
