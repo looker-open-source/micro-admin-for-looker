@@ -24,7 +24,23 @@ See [`server/config.example.json`](../server/config.example.json)
 	</details>
 	</li>
 	<li><details><summary><code>port</code></summary>
-	Required. A number for the port that the server will listen on. (Currently only http, not https, is provided. Add an SSL termination load balancer for https/production use)
+	Required. A number for the port that the server will listen on.
+	</details>
+	</li>
+	<li><details><summary><code>https</code></summary>
+	Optional. If the server should listen over HTTPs, set this to an object with the below properties.
+	</details>
+	</li>
+	<li><details><summary><code>https.port</code></summary>
+	Conditionally Required. A number for the port that the server will listen on over HTTPS.
+	</details>
+	</li>
+	<li><details><summary><code>https.key</code></summary>
+	Conditionally Required. Path to the key to use for HTTPS.
+	</details>
+	</li>
+	<li><details><summary><code>https.cert</code></summary>
+	Conditionally Required. Path to the certificate to use for HTTPS.
 	</details>
 	</li>
 	<li><details><summary><code>primaryHostId</code></summary>

@@ -21,7 +21,7 @@ Note: As of Looker 22.16, OAuth clients cannot be set up without https. Please s
 
 ### HTTPS
 
-μAdmin does not currently provide HTTPS. You should deploy it behind an SSL terminating load balancer/proxy.
+μAdmin can serve over HTTPS, if configured appropriately. You can alternately deploy it behind an SSL terminating load balancer/proxy.
 
 ### Node production mode
 

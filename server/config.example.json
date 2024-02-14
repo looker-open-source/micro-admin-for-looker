@@ -1,5 +1,10 @@
 {
 	"port":3000,
+	"https":{
+		"port":3443,
+		"cert":"path/to/cert",
+		"key":"path/to/key"
+	},
 	"oauthClientAppGuid":"micro-admin-for-looker",
 	"callbackUrlPrefix":"http://localhost:3000",
 	"corsOrigin":null,

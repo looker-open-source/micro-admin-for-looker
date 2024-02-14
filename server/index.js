@@ -19,6 +19,8 @@ const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const http = require('http')
+const https = require('https')
 
 const expressRequestLogger = require('./lib/express-middleware/request-logger.js')
 const routeHandlers = require('./route-handlers')
@@ -39,7 +41,6 @@ async function main(){
 	await Promise.all(asyncAllSetupHosts)
 
 	await initServer()
-	console.log(`\nhttp://localhost:${config.port}/`)
 	}
 
 async function initServer(){
@@ -78,5 +79,16 @@ async function initServer(){
 		res.status(err.status||500).json(err.message||err)
 		})
 
-	app.listen(config.port)
+	//app.listen(config.port)
+	http.createServer(app).listen(config.port)
+	console.log(`\nhttp://localhost:${config.port}/`)
+	if(config.https){
+		let options = {
+			key: fs.readFileSync(config.https.key),
+			cert: fs.readFileSync(config.https.cert)
+			//,ca: fs.readFileSync('/path/to/ca.pem')
+			}
+		https.createServer(options, app).listen(config.https.port)
+		console.log(`\nhttps://localhost:${config.https.port}/`)
+		}
 	}
