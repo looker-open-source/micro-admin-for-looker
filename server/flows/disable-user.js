@@ -33,7 +33,7 @@ module.exports = {
 			return {
 				prompt: {
 					userId: {
-						type: "number",
+						type: "string",
 						required:true,
 						enum:disableCandidates.map(u=>u.id),
 						options:{enum_titles: disableCandidates.map(u=>`${u.display_name} (${u.id})`)}

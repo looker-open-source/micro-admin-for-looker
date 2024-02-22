@@ -39,7 +39,7 @@ module.exports = {
 			return {
 				prompt: {
 					groupId: {
-						type: "number",
+						type: "string",
 						required:true,
 						enum:sortedGroups.map(g=>g.id),
 						options:{enum_titles: sortedGroups.map(g=>`${g.name} (${g.id})`)}
